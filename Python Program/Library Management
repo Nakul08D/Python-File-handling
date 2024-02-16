@@ -1,0 +1,128 @@
+class Library:
+    def __init__(self,l):
+        self.l=l
+        self.li=list(self.l)
+
+    def booklist(self):
+        with open("Book.txt",'r')as f:
+                    books=f.read()
+                    for book in books:
+                        for i in book:
+                            print(i,end='')
+        #for i in self.l:
+        #    print("*",i)
+    
+    def issuebook(self,b_name):
+        
+        with open('Book.txt', 'r') as file:
+            text = file.read()
+            if(b_name in text):
+                print(f"Your Book {b_name} is Issues")
+                with open('Book.txt', 'w') as file:
+                    new_text = text.replace(b_name,'')
+                    file.write(new_text)
+                return b_name
+            else:
+                print(f"Sorry! {b_name} is not available.")
+
+        # with open('Book.txt', 'w') as file:
+        #     new_text = text.replace(b_name,'')
+        #     file.write(new_text)
+        
+        # if b_name in self.li:
+        #         if(b_name not in self.l):
+        #             print("Sorry! This book is issued already.")
+        #         else:
+        #             self.l.remove(b_name)
+        #             print(f"Your Book {b_name} is Issues")
+        # else:
+        #     print("Sorry! This Book is not available.")            
+
+    def returnbook(self,r_name):
+        with open('Book.txt', 'r') as file:
+            text = file.read()
+            if(r_name in text):
+                print(f"You have already returned {r_name} Book. ")
+            else:
+                with open('Copy.txt','r') as file:
+                    text = file.read()
+                if(r_name in text):
+                    print(f"Thanks for returning {r_name} Book.")
+                    with open ("Book.txt","a+")as f:
+                        f.write(f"{r_name}\n")
+                    return r_name
+                else:
+                    print(f"This {r_name} Book is not from this Library.")
+        # if r_name in self.li:
+        #     if r_name in self.l:
+        #         print("Sorry! You have returned already.")
+        #     else:
+        #         self.l.append(r_name)
+        #         print(f"Your Book {r_name} is Returned")
+        # else:
+        #     print("Sorry! This Book is not from our Library.")
+
+class student:
+    def iss_b_name(self):
+        b_name=input("Enter Book name you want to issue:")
+        return b_name
+    
+    def re_b_name(self):
+        r_name=input("Enter Book name you want to return:")
+        return r_name
+    
+StudentsName=["Nakul","Sagar","Aman","Amit","Ritu"]
+lib=Library(["Peter","Rich","The Art","Mind Game"])
+n1=student()
+
+while(True):
+
+    name=input("Enter Name:")
+
+    if(name in StudentsName):
+        print(f'''Welcome {name} to our library:
+        Please select option you want:''')
+        while(True):
+            print('''
+                1.Booklist
+                2.IssueBook
+                3.ReturnBook
+                4.Exit''')
+            
+            n=int(input("Enter Number:"))
+
+            if(n==1):
+                lib.booklist()
+            #lib.booklist()
+            elif(n==2):
+                a=lib.issuebook(n1.iss_b_name())
+                if(a==None):
+                    pass
+                else:
+                    with open(f"{name}.txt",'r')as f:
+                        book=f.read()
+                        if a not in book:
+                            with open(f"{name}.txt",'a+')as f:
+                                f.write("\n")
+                                f.write(a)
+                    
+            elif(n==3):
+                a=lib.returnbook(n1.re_b_name())
+                if(a==None):
+                    pass
+                else:
+                    with open(f"{name}.txt",'r')as f:
+                        text = f.read()
+                    with open(f"{name}.txt", 'w') as file:
+                        new_text = text.replace(a,'')
+                        file.write(new_text)
+                
+            elif(n==4):
+                print("Thanks for visiting our Library:")
+                break
+            else:
+                print("You have Enter wrong Option Check Again!")
+    else:
+        print("Wrong Creditionals! check again!")
+
+                

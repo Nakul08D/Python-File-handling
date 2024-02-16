@@ -1,0 +1,53 @@
+#List Comprehension Examples:
+
+# list=[1,2,3,4,5]
+# s=0
+# List2=[s:=s+i for i in list]
+# print("list Comprehension Example 1: ")
+# print("The sum of list is:",s)
+# print(" - - - - - - - -  - - - - -  - -  -")
+# l1=[45,2,41,2,4,11,10,47,88,78]
+# l2=[i for i in l1 if i>40]
+# print("Item in l2 is:",l2)
+# print(" - - - - - - - -  - - - - -  - -  -")
+# li1=[45,41,2,4,11,10,47,88,78]
+# li2=[i for i in li1 if i%2==0]
+# print(li2)
+# print(" - - - - - - - -  - - - - -  - -  -")
+
+# a=lambda x:x*x
+# q=[1,2,3,4,5]
+# result=list(map(a,q))
+# print(result)
+
+# print(" - - - - - - - -  - - - - -  - -  -")
+
+# r=lambda x:x>4
+# q=[11,2,3,4,5]
+# result=list(filter(r,q))
+# print(result)
+
+# Try Except Example:
+
+import random
+
+def game(n):
+    c=1
+    while(True):
+        try:
+            num=int(input("Enter number:"))
+            if(num<n):
+                print("Greater Number Please!")
+            elif(num>n):
+                print("Smaller Number Please!")
+            else:
+                print(f"You Choose Correct Number in {c} Times")
+                break
+            c+=1
+        except ValueError:
+            print("Choose number only....")
+        except Exception as e:
+            print(e)
+
+n=random.randint(1,30)
+game(n)
